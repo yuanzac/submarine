@@ -1,4 +1,5 @@
 #!/bin/bash
+
 # Licensed to the Apache Software Foundation (ASF) under one or more
 # contributor license agreements.  See the NOTICE file distributed with
 # this work for additional information regarding copyright ownership.
@@ -24,9 +25,7 @@ nohup dockerd --host=unix:///var/run/docker.sock > /var/log/dockerd.log 2>&1 &
 # Directory to find config artifacts
 CONFIG_DIR="/tmp/hadoop-config"
 
-
 # Copy config files from volume mount
-
 for f in slaves core-site.xml hdfs-site.xml mapred-site.xml yarn-site.xml container-executor.cfg capacity-scheduler.xml node-resources.xml resource-types.xml submarine.xml; do
   if [[ -e ${CONFIG_DIR}/$f ]]; then
     cp ${CONFIG_DIR}/$f $HADOOP_PREFIX/etc/hadoop/$f
@@ -84,6 +83,16 @@ usermod -aG supergroup yarn
 usermod -aG docker yarn
 su yarn -c "/usr/local/hadoop/bin/hadoop fs -mkdir -p /user/yarn"
 echo "export PATH=$PATH:/usr/local/hadoop/bin" >> /home/yarn/.bashrc
+
+# modify yarn-env.sh
+cat >> ${HADOOP_CONF_DIR}/yarn-env.sh <<- EOM
+
+# Remote Debug
+if [ "${SUSPEND}" = true ]; then
+  export YARN_RESOURCEMANAGER_OPTS="-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=20000"
+  export YARN_NODEMANAGER_OPTS="-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=20001"
+fi
+EOM
 
 if [[ "${HOSTNAME}" =~ "submarine-dev" ]]; then
   sed -i s/yarn-rm/0.0.0.0/ $HADOOP_PREFIX/etc/hadoop/yarn-site.xml
