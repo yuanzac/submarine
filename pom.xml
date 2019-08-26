@@ -54,6 +54,7 @@
     <plugin.war.version>2.3</plugin.war.version>
 
     <!--library versions-->
+    <tony.version>0.3.21</tony.version>
     <jersey.version>2.27</jersey.version>
     <jersey.servlet.version>1.13</jersey.servlet.version>
     <jetty.version>9.4.18.v20190429</jetty.version>
@@ -100,7 +101,7 @@
   </properties>
 
   <modules>
-    <module>submarine-tony</module>
+    <module>submodules/tony</module>
     <module>submarine-core</module>
     <module>submarine-all</module>
     <module>submarine-web</module>
@@ -286,7 +287,7 @@
             </goals>
             <configuration>
               <failOnViolation>true</failOnViolation>
-              <excludes>org/apache/submarine/tony/rpc/proto/*,org/apache/submarine/tony/events/avro/*</excludes>
+              <excludes>com/linkedin/tony/rpc/proto/*,com/linkedin/tony/events/*</excludes>
             </configuration>
           </execution>
           <execution>
@@ -323,7 +324,7 @@
             <exclude>**/*.xsd</exclude>
             <exclude>**/*.json</exclude>
             <exclude>**/*.conf</exclude>
-            <exclude>**/src/main/java/org/apache/submarine/tony/events/avro/*</exclude>
+            <exclude>**/src/main/java/com/linkedin/tony/events/*</exclude>
             <exclude>**/src/main/resources/META-INF/services/org.apache.hadoop.security.SecurityInfo</exclude>
             <exclude>**/src/test/resources/typicalHistFolder/job1/application123-1-1-user1-SUCCEEDED.jhist</exclude>
             <exclude>**/conf/routes</exclude>
