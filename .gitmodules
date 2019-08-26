@@ -1,4 +1,4 @@
 [submodule "tony"]
 	path = tony
-	url = git@github.com:hadoopsubmarine/linkedin-tony.git
+	url = https://github.com/hadoopsubmarine/linkedin-tony.git
 	branch = submarine
