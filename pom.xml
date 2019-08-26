@@ -380,6 +380,7 @@
             <exclude>.git/</exclude>
             <exclude>.github/*</exclude>
             <exclude>.gitignore</exclude>
+            <exclude>.gitmodules</exclude>
             <exclude>LICENSE</exclude>
             <exclude>license_header</exclude>
             <exclude>**/*.la</exclude>
@@ -399,6 +400,7 @@
             <exclude>**/src/main/resources/META-INF/services/org.apache.hadoop.security.SecurityInfo</exclude>
             <exclude>**/src/test/resources/typicalHistFolder/job1/application123-1-1-user1-SUCCEEDED.jhist</exclude>
             <exclude>**/conf/routes</exclude>
+            <exclude>submarine-runtime/yarnservice-runtime/target/**</exclude>
           </excludes>
         </configuration>
       </plugin>
